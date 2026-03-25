@@ -1,13 +1,6 @@
+import { CATEGORIES } from '@/lib/data';
 import { NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
-import { Category } from '@/models/Category';
 
 export async function GET() {
-  try {
-    await connectDB();
-    const categories = await Category.find({}).sort({ name: 1 });
-    return NextResponse.json({ success: true, data: categories });
-  } catch {
-    return NextResponse.json({ success: false, error: 'Server error' }, { status: 500 });
-  }
+  return NextResponse.json({ success: true, count: CATEGORIES.length, data: CATEGORIES });
 }

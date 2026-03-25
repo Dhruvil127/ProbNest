@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { DEMO_PROBLEMS } from '@/lib/demo-content';
+import { getSiteUrl } from '@/lib/site-url';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://problembase.com';
+  const baseUrl = getSiteUrl();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     '',

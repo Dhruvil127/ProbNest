@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { FounderModeProvider } from '@/context/FounderModeContext';
+import { getSiteUrl } from '@/lib/site-url';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   title: 'ProblemBase | Discover High-Signal Problems Worth Solving',
   description:
     'A curated platform for founders and operators to discover real-world problems, evaluate market friction, and spot product opportunities faster.',
-  metadataBase: new URL('https://problembase.com'),
+  metadataBase: new URL(getSiteUrl()),
   openGraph: {
     title: 'ProblemBase',
     description:

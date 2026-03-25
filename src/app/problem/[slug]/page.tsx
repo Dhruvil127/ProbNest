@@ -10,6 +10,7 @@ import ShareButtons from '@/components/ShareButtons';
 import VisionEngine from '@/components/VisionEngine';
 import ProblemModeView from '@/components/ProblemModeView';
 import type { FounderSwipeData } from '@/components/FounderSwipeCards';
+import { getSiteUrl } from '@/lib/site-url';
 
 export async function generateMetadata({
   params,
@@ -78,6 +79,7 @@ export default async function ProblemPage({
     keywords: problem.tags,
     articleSection: categoryName,
   };
+  const siteUrl = getSiteUrl();
 
   const visionData = {
     title: String(problem.title),
@@ -191,7 +193,7 @@ export default async function ProblemPage({
             <VisionEngine {...visionData} />
 
             <div className="mt-8">
-              <ShareButtons url={`https://problembase.com/problem/${problem.slug}`} title={problem.title} />
+              <ShareButtons url={`${siteUrl}/problem/${problem.slug}`} title={problem.title} />
             </div>
           </div>
         </section>

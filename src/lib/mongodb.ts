@@ -1,10 +1,8 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/problembase';
-
-if (!process.env.MONGODB_URI) {
-  console.warn('MONGODB_URI is not defined in the environment variables, falling back to local database.');
-}
+const MONGODB_URI =
+  process.env.MONGODB_URI ||
+  (process.env.NODE_ENV === 'development' ? 'mongodb://localhost:27017/problembase' : '');
 
 type MongooseCache = {
   conn: typeof mongoose | null;
@@ -22,6 +20,10 @@ if (!global.mongooseCache) {
 }
 
 async function connectDB() {
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_URI is required in production. Add it in your Vercel project environment variables.');
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
