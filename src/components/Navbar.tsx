@@ -1,141 +1,93 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import FounderModeToggle from '@/components/FounderModeToggle';
+import { Lightbulb, Bookmark, Menu, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
-const NAV_LINKS = [
-  { href: '/', label: 'Discover' },
-  { href: '/categories', label: 'Categories' },
-  { href: '/favorites', label: 'Favorites' },
+const CATEGORIES = [
+  { name: "Finance", slug: "finance" },
+  { name: "Career", slug: "career" },
+  { name: "Life", slug: "life" },
+  { name: "Tech", slug: "tech" }
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const close = () => setOpen(false);
-    window.addEventListener('resize', close);
-
-    return () => window.removeEventListener('resize', close);
-  }, [open]);
-
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY <= 8) {
-        setVisible(true);
-        lastScrollY = currentScrollY;
-        return;
-      }
-
-      if (currentScrollY > lastScrollY) {
-        setVisible(false);
-        setOpen(false);
-      } else if (currentScrollY < lastScrollY) {
-        setVisible(true);
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const [isCatOpen, setIsCatOpen] = useState(false);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-[100] transition-transform duration-300 ${
-        visible ? 'translate-y-0' : '-translate-y-full'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between border-b border-white/10 px-2 py-3 sm:px-4">
-          <Link href="/" className="flex items-center gap-3">
-            <div>
-              <p className="font-display text-xl leading-none tracking-[-0.04em] text-white">ProblemBase</p>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-app-muted">Market friction, curated</p>
-            </div>
-          </Link>
-
-          <nav className="hidden items-center gap-2 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm font-medium text-app-muted hover:text-white"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden items-center gap-3 lg:flex">
-            <FounderModeToggle />
-            <Link href="/favorites" className="px-4 py-2 text-sm font-medium text-app-muted hover:text-white">
-              Idea Bank
+    <nav className="fixed top-0 z-[100] w-full bg-[#000]/60 backdrop-blur-2xl border-b border-white/[0.08] selection:bg-[#3E6BFF]/30 selection:text-white">
+      <div className="max-w-screen-2xl mx-auto px-10">
+        <div className="flex justify-between items-center h-20">
+          
+          <div className="flex items-center gap-16">
+            {/* Probnest logo - Minimalist & Premium */}
+            <Link href="/" className="flex items-center gap-3 active:scale-95 transition-transform group">
+              <div className="w-9 h-9 flex items-center justify-center relative bg-[#3E6BFF] rounded-xl shadow-[0_0_30px_rgba(62,107,255,0.4)]">
+                 <svg viewBox="0 0 40 40" className="w-5 h-5 text-white fill-current"><path d="M20 0L0 20L20 40L40 20L20 0ZM20 10L30 20L20 30L10 20L20 10Z"/></svg>
+              </div>
+              <span className="font-extrabold text-2xl tracking-tighter text-white uppercase italic">
+                PROB<span className="text-[#3E6BFF]">NEST</span>
+              </span>
             </Link>
-            <Link href="/submit" className="btn-primary px-5 py-2.5">
-              Submit Problem
+
+            {/* Main Navigation Links */}
+            <div className="hidden lg:flex items-center gap-10">
+              <Link href="/" className="text-[12px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors">Insights</Link>
+              <Link href="/top-10" className="text-[12px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors">Top 10</Link>
+              
+              <div 
+                className="relative cursor-pointer"
+                onMouseEnter={() => setIsCatOpen(true)}
+                onMouseLeave={() => setIsCatOpen(false)}
+              >
+                <div className="text-[12px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors flex items-center gap-1">
+                  Problems <ChevronRight className={`w-3 h-3 transition-transform ${isCatOpen ? 'rotate-90' : ''}`} />
+                </div>
+                <AnimatePresence>
+                  {isCatOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-full left-0 mt-4 w-60 bg-[#111] border border-white/10 rounded-2xl p-3 shadow-2xl backdrop-blur-2xl"
+                    >
+                      {CATEGORIES.map((cat) => (
+                        <Link 
+                          key={cat.slug}
+                          href={`/categories?filter=${cat.name}`}
+                          className="block px-4 py-3 text-[11px] font-black uppercase tracking-widest text-white/50 hover:text-[#3E6BFF] hover:bg-white/5 transition-all rounded-xl"
+                        >
+                          {cat.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <Link href="/mission" className="text-[12px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors">Mission</Link>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <Link 
+              href="/favorites" 
+              className="text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-2 px-6 py-2 border border-white/10 rounded-full bg-white/5 hover:bg-white/10 transition-all text-white/70 hover:text-white"
+            >
+              <Bookmark className="w-4 h-4 fill-current text-[#3E6BFF]" /> Bank
+            </Link>
+
+            <Link 
+              href="/submit" 
+              className="px-8 py-3 bg-[#3E6BFF] text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-black transition-all shadow-[0_15px_30px_rgba(62,107,255,0.3)] active:scale-95"
+            >
+              Post Itch
             </Link>
           </div>
 
-          <button
-            type="button"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            onClick={() => setOpen((value) => !value)}
-            className="h-11 w-11 rounded-full border border-white/12 text-white lg:hidden"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
       </div>
-
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            className="mx-4 mt-3 lg:hidden"
-          >
-            <div className="border-t border-white/10 bg-[rgba(7,17,31,0.96)] p-4 backdrop-blur-xl">
-              <div className="mb-4 flex justify-center">
-                <FounderModeToggle />
-              </div>
-              <div className="space-y-2">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block px-1 py-3 text-sm font-medium text-app-muted hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-              <div className="mt-4 grid gap-3">
-                <Link href="/favorites" onClick={() => setOpen(false)} className="px-1 py-2 text-sm font-medium text-app-muted hover:text-white">
-                  Open Idea Bank
-                </Link>
-                <Link href="/submit" onClick={() => setOpen(false)} className="btn-primary w-full">
-                  Submit Problem
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-    </header>
+    </nav>
   );
 }
