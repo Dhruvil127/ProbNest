@@ -54,25 +54,25 @@ export default function ProblemSwipeCard({
           opacity: 0.72 - stackIndex * 0.16,
         }}
       >
-        <div className="relative h-[520px] overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(160deg,rgba(17,27,46,0.94)_0%,rgba(9,16,30,0.92)_55%,rgba(7,13,24,0.96)_100%)] shadow-[0_18px_40px_rgba(2,6,23,0.2)]">
+        <div className="relative h-[440px] sm:h-[480px] lg:h-[520px] overflow-hidden rounded-[24px] sm:rounded-[30px] border border-white/10 bg-[linear-gradient(160deg,rgba(17,27,46,0.94)_0%,rgba(9,16,30,0.92)_55%,rgba(7,13,24,0.96)_100%)] shadow-[0_18px_40px_rgba(2,6,23,0.2)]">
           <div className="absolute inset-x-10 top-10 h-20 rounded-full bg-[radial-gradient(circle,rgba(214,163,93,0.16),transparent_70%)] blur-2xl" />
-          <div className="relative flex h-full flex-col p-6 sm:p-8">
+          <div className="relative flex h-full flex-col p-5 sm:p-8">
             <div className="flex items-start justify-between gap-4">
-              <span className="pill px-3 py-1.5 text-[10px] text-[var(--accent-strong)]">{problem.category}</span>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-white/30">Queued</span>
+              <span className="pill px-2.5 py-1 text-[9px] sm:text-[10px] text-[var(--accent-strong)]">{problem.category}</span>
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-white/30">Queued</span>
             </div>
 
-            <div className="mt-8">
-              <p className="text-xs uppercase tracking-[0.24em] text-app-muted">Next problem</p>
-              <h3 className="mt-3 font-display text-3xl leading-[1.02] tracking-[-0.05em] text-white/92 sm:text-4xl">
+            <div className="mt-6 sm:mt-8">
+              <p className="text-[10px] sm:text-xs uppercase tracking-[0.24em] text-app-muted">Next problem</p>
+              <h3 className="mt-2 sm:mt-3 font-display text-2xl sm:text-3xl lg:text-4xl leading-[1.02] tracking-[-0.05em] text-white/92">
                 {problem.title}?
               </h3>
-              <p className="mt-4 max-w-[28ch] text-sm leading-7 text-white/55">{problem.description}</p>
+              <p className="mt-3 sm:mt-4 max-w-[28ch] text-xs sm:text-sm leading-6 sm:leading-7 text-white/55">{problem.description}</p>
             </div>
 
-            <div className="mt-auto border-t border-white/8 pt-5">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">Opportunity</p>
-              <p className="mt-3 text-sm leading-7 text-white/60">{problem.opportunity}</p>
+            <div className="mt-auto border-t border-white/8 pt-4 sm:pt-5">
+              <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">Opportunity</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-6 sm:leading-7 text-white/60">{problem.opportunity}</p>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function ProblemSwipeCard({
       style={{ x, rotate, scale, opacity: backgroundOpacity }}
       className="absolute inset-0 cursor-grab select-none active:cursor-grabbing"
     >
-      <div className="relative h-full overflow-hidden rounded-[34px] border border-[rgba(255,255,255,0.12)] bg-[linear-gradient(160deg,rgba(22,34,58,0.98)_0%,rgba(9,16,30,0.98)_50%,rgba(8,15,27,1)_100%)] p-6 shadow-[0_32px_80px_rgba(2,6,23,0.45)] sm:p-8">
+      <div className="relative h-full overflow-hidden rounded-[28px] sm:rounded-[34px] border border-[rgba(255,255,255,0.12)] bg-[linear-gradient(160deg,rgba(22,34,58,0.98)_0%,rgba(9,16,30,0.98)_50%,rgba(8,15,27,1)_100%)] p-5 sm:p-8 shadow-[0_32px_80px_rgba(2,6,23,0.45)]">
         <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top,rgba(214,163,93,0.22),transparent_70%)]" />
         <div className="absolute -right-16 top-12 h-48 w-48 rounded-full bg-[rgba(136,174,247,0.18)] blur-3xl" />
 
@@ -98,8 +98,8 @@ export default function ProblemSwipeCard({
             style={{ opacity: likeOpacity }}
             className="absolute inset-0 z-20 grid place-items-center bg-[rgba(103,213,192,0.12)] pointer-events-none"
           >
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-slate-950 shadow-xl">
-              <Bookmark className="h-8 w-8 fill-current text-[var(--accent)]" />
+            <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-white text-slate-950 shadow-xl">
+              <Bookmark className="h-6 w-6 sm:h-8 sm:w-8 fill-current text-[var(--accent)]" />
             </div>
           </motion.div>
           <motion.div
@@ -107,29 +107,29 @@ export default function ProblemSwipeCard({
             style={{ opacity: skipOpacity }}
             className="absolute inset-0 z-20 grid place-items-center bg-black/20 pointer-events-none"
           >
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/12 text-white backdrop-blur-md">
-              <X className="h-8 w-8" />
+            <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-white/12 text-white backdrop-blur-md">
+              <X className="h-6 w-6 sm:h-8 sm:w-8" />
             </div>
           </motion.div>
         </AnimatePresence>
 
         <div className="relative z-10 flex h-full flex-col">
           <div className="flex items-start justify-between gap-4">
-            <span className="pill px-3 py-1.5 text-[10px] text-[var(--accent-strong)]">{problem.category}</span>
+            <span className="pill px-2.5 py-1 text-[9px] sm:text-[10px] text-[var(--accent-strong)]">{problem.category}</span>
           </div>
 
-          <div className="mt-10">
-            <p className="text-sm uppercase tracking-[0.24em] text-app-muted">The problem</p>
-            <h2 className="mt-3 font-display text-4xl leading-[1] tracking-[-0.05em] text-white sm:text-5xl">
+          <div className="mt-8 sm:mt-10">
+            <p className="text-[11px] sm:text-sm uppercase tracking-[0.24em] text-app-muted">The problem</p>
+            <h2 className="mt-2 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.05em] text-white">
               {problem.title}?
             </h2>
-            <p className="mt-5 text-sm leading-7 text-app-muted">{problem.description}</p>
+            <p className="mt-4 sm:mt-5 text-xs sm:text-sm leading-6 sm:leading-7 text-app-muted">{problem.description}</p>
           </div>
 
           <div className="mt-auto">
-            <div className="border-t border-white/10 pt-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">Opportunity</p>
-              <p className="mt-3 text-sm leading-7 text-white/88">{problem.opportunity}</p>
+            <div className="border-t border-white/10 pt-4 sm:pt-5">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">Opportunity</p>
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-6 sm:leading-7 text-white/88">{problem.opportunity}</p>
             </div>
           </div>
         </div>

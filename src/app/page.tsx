@@ -100,10 +100,11 @@ export default function Home() {
   return (
     <div className="page-shell pb-20">
       <section className="page-section pt-10 lg:pt-14">
-        <div className="relative mx-auto flex min-h-[760px] w-full items-center justify-center overflow-hidden">
-          <div className="hero-glow absolute inset-x-8 top-24 h-72 rounded-full" />
+        <div className="relative mx-auto flex min-h-[600px] lg:min-h-[760px] w-full items-center justify-center overflow-hidden py-12 lg:py-0">
+          <div className="hero-glow absolute inset-x-8 top-12 lg:top-24 h-48 lg:h-72 rounded-full" />
 
-          <div className="absolute left-0 top-1/2 z-10 hidden w-[240px] -translate-y-1/2 xl:block 2xl:left-[2%]">
+          {/* Side Showcase - Hidden on Mobile/Tablet, optimized for Laptop/Desktop */}
+          <div className="absolute left-0 top-1/2 z-10 hidden w-[200px] xl:w-[240px] -translate-y-1/2 xl:block 2xl:left-[2%]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`left-${showcase.startup}`}
@@ -112,15 +113,15 @@ export default function Home() {
                 exit={{ opacity: 0, x: 24 }}
                 transition={{ duration: 0.45 }}
               >
-                <div className="border-l border-white/14 pl-5">
+                <div className="border-l border-white/14 pl-4 xl:pl-5">
                   <Link href={`/problem/${showcase.slug}`} className="block">
-                    <h3 className="font-display text-4xl leading-none tracking-[-0.06em] text-white transition-colors hover:text-[var(--accent-strong)] 2xl:text-5xl">
+                    <h3 className="font-display text-3xl xl:text-4xl leading-none tracking-[-0.06em] text-white transition-colors hover:text-[var(--accent-strong)] 2xl:text-5xl">
                       {showcase.startup}
                     </h3>
                   </Link>
                   <Link
                     href={`/problem/${showcase.slug}`}
-                    className="mt-4 block text-lg leading-8 text-app-muted transition-colors hover:text-white 2xl:text-xl"
+                    className="mt-3 xl:mt-4 block text-base xl:text-lg leading-7 xl:leading-8 text-app-muted transition-colors hover:text-white 2xl:text-xl"
                   >
                     {showcase.founder} + {showcase.coFounder}
                   </Link>
@@ -129,7 +130,7 @@ export default function Home() {
             </AnimatePresence>
           </div>
 
-          <div className="absolute right-0 top-1/2 z-10 hidden w-[240px] -translate-y-1/2 xl:block 2xl:right-[2%]">
+          <div className="absolute right-0 top-1/2 z-10 hidden w-[200px] xl:w-[240px] -translate-y-1/2 xl:block 2xl:right-[2%]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`right-${showcase.startup}`}
@@ -138,10 +139,10 @@ export default function Home() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.45 }}
               >
-                <div className="border-r border-white/14 pr-5 text-right">
+                <div className="border-r border-white/14 pr-4 xl:pr-5 text-right">
                   <Link
                     href={`/problem/${showcase.slug}`}
-                    className="block text-2xl leading-10 tracking-[-0.03em] text-white/90 transition-colors hover:text-[var(--accent-strong)] 2xl:text-3xl 2xl:leading-[3rem]"
+                    className="block text-xl xl:text-2xl leading-8 xl:leading-10 tracking-[-0.03em] text-white/90 transition-colors hover:text-[var(--accent-strong)] 2xl:text-3xl 2xl:leading-[3rem]"
                   >
                     {showcase.solved}
                   </Link>
@@ -150,9 +151,9 @@ export default function Home() {
             </AnimatePresence>
           </div>
 
-          <div className="relative z-10 mx-auto flex w-full max-w-[640px] justify-center">
-            <div className="premium-card relative w-full max-w-[540px] overflow-hidden p-5 sm:p-6">
-              <div className="relative h-[560px]">
+          <div className="relative z-10 mx-auto flex w-full max-w-[90vw] sm:max-w-[540px] lg:max-w-[640px] justify-center px-4">
+            <div className="premium-card relative w-full h-fit overflow-hidden p-4 sm:p-5 lg:p-6">
+              <div className="relative h-[480px] sm:h-[520px] lg:h-[560px]">
                 <AnimatePresence mode="popLayout">
                   {currentIndex >= 0 ? (
                     SWIPE_PROBLEMS.slice(0, currentIndex + 1).map((problem, index) => (
@@ -168,14 +169,14 @@ export default function Home() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.96 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="premium-card absolute inset-0 flex flex-col items-center justify-center gap-5 p-10 text-center"
+                      className="premium-card absolute inset-0 flex flex-col items-center justify-center gap-4 sm:gap-5 p-6 sm:p-10 text-center"
                     >
-                      <div className="gold-ring flex h-20 w-20 items-center justify-center rounded-full bg-[radial-gradient(circle_at_top,#f4c684_0%,#d6a35d_60%,#8c6333_100%)]">
-                        <Check className="h-9 w-9 text-slate-950" />
+                      <div className="gold-ring flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-[radial-gradient(circle_at_top,#f4c684_0%,#d6a35d_60%,#8c6333_100%)]">
+                        <Check className="h-7 w-7 sm:h-9 sm:w-9 text-slate-950" />
                       </div>
                       <div>
-                        <h3 className="font-display text-4xl tracking-[-0.05em] text-white">Signal stack complete</h3>
-                        <p className="mt-3 max-w-sm text-sm leading-7 text-app-muted">
+                        <h3 className="font-display text-3xl sm:text-4xl tracking-[-0.05em] text-white">Signal stack complete</h3>
+                        <p className="mt-3 max-w-sm text-sm leading-6 sm:leading-7 text-app-muted">
                           You reviewed today&apos;s strongest ideas. Restart to keep exploring.
                         </p>
                       </div>
@@ -188,11 +189,11 @@ export default function Home() {
               </div>
 
               {currentIndex >= 0 ? (
-                <div className="mt-6 flex items-center justify-center gap-5 text-sm uppercase tracking-[0.28em] text-app-muted">
+                <div className="mt-4 sm:mt-6 flex items-center justify-center gap-5 text-[10px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.28em] text-app-muted">
                   <span className="flex items-center gap-2">
-                    <ArrowLeft className="h-4 w-4 rotate-[35deg]" />
+                    <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 rotate-[35deg]" />
                     Swipe
-                    <ArrowRight className="h-4 w-4 -rotate-[35deg]" />
+                    <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 -rotate-[35deg]" />
                   </span>
                 </div>
               ) : null}
@@ -202,16 +203,16 @@ export default function Home() {
       </section>
 
       <section className="page-section mt-10">
-        <div className="mb-6 flex items-end justify-between gap-4">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <p className="text-sm uppercase tracking-[0.24em] text-app-muted">Trending problems</p>
-            <h2 className="section-heading mt-2 text-white">High-signal friction users keep returning to solve.</h2>
+            <p className="text-xs sm:text-sm uppercase tracking-[0.24em] text-app-muted">Trending problems</p>
+            <h2 className="section-heading mt-2 text-white">High-signal friction.</h2>
           </div>
-          <Link href="/categories" className="hidden text-sm font-medium text-[var(--brand)] sm:inline-flex">
-            View all
+          <Link href="/categories" className="text-sm font-medium text-[var(--brand)] inline-flex items-center gap-1 group">
+            View all <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
-        <div className="grid gap-6 xl:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {latestPosts.slice(0, 3).map((problem, index) => (
             <ProblemCard
               key={problem.slug}
